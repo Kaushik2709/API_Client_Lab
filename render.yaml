@@ -1,0 +1,38 @@
+services:
+  # Backend Web Service
+  - type: web
+    name: quickapi-backend
+    env: node
+    rootDir: quickapi-backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        fromService:
+          name: quickapi-frontend
+          type: static_site
+          property: url
+
+  # Frontend Static Site
+  - type: static_site
+    name: quickapi-frontend
+    env: static
+    rootDir: api-lab-main
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: quickapi-backend
+          type: web
+          property: url
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+@layer base {
+  :root {
+    /* Light mode - minimal, kept for toggle */
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 215 20% 95%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 215 20% 93%;
+    --muted-foreground: 215 16% 47%;
+    
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 199 89% 48%;
+    
+    --radius: 0.5rem;
+    
+    /* Sidebar */
+    --sidebar-background: 220 16% 96%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 199 89% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 20% 91%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 88%;
+    --sidebar-ring: 199 89% 48%;
+  }
+
+  .dark {
+    /* Dark mode - primary theme */
+    --background: 224 20% 6%;
+    --foreground: 210 40% 98%;
+    
+    --card: 224 20% 9%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 224 20% 8%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 189 94% 43%;
+    --primary-foreground: 224 20% 6%;
+    
+    --secondary: 224 20% 14%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 224 20% 12%;
+    --muted-foreground: 215 20% 55%;
+    
+    --accent: 189 94% 43%;
+    --accent-foreground: 224 20% 6%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    
+    --info: 189 94% 43%;
+    --info-foreground: 224 20% 6%;
+    
+    --border: 224 20% 16%;
+    --input: 224 20% 14%;
+    --ring: 189 94% 43%;
+    
+    /* Sidebar */
+    --sidebar-background: 224 20% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 189 94% 43%;
+    --sidebar-primary-foreground: 224 20% 6%;
+    --sidebar-accent: 224 20% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 224 20% 14%;
+    --sidebar-ring: 189 94% 43%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
+
+@layer components {
+  /* Code styling */
+  .code-editor {
+    @apply font-mono text-sm leading-relaxed;
+  }
+  
+  /* JSON syntax highlighting */
+  .json-key {
+    @apply text-primary;
+  }
+  
+  .json-string {
+    @apply text-success;
+  }
+  
+  .json-number {
+    @apply text-warning;
+  }
+  
+  .json-boolean {
+    @apply text-destructive;
+  }
+  
+  .json-null {
+    @apply text-muted-foreground;
+  }
+  
+  /* Smooth transitions */
+  .transition-base {
+    @apply transition-all duration-200 ease-out;
+  }
+  
+  /* Focus ring */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+  
+  /* Glow effect for primary elements */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.15);
+  }
+  
+  .glow-success {
+    box-shadow: 0 0 12px hsl(var(--success) / 0.3);
+  }
+  
+  .glow-destructive {
+    box-shadow: 0 0 12px hsl(var(--destructive) / 0.3);
+  }
+}
+
+@layer utilities {
+  /* Line numbers for code */
+  .line-numbers {
+    counter-reset: line;
+  }
+  
+  .line-numbers > span::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply inline-block w-8 mr-4 text-right text-muted-foreground/50 select-none;
+  }
+}
