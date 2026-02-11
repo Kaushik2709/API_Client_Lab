@@ -10,10 +10,13 @@ import Signup from "./pages/Signup";
 import ProfileDetails from "./components/ui/ProfileDetails";
 import AuthProvider from "./context/AuthContext";
 import { ThemeProvider } from "next-themes";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
 const App = () => (
+  
+
   <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
@@ -22,10 +25,10 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/profileDetails" element={<ProfileDetails />} />
+              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+              <Route path="/profileDetails" element={<ProtectedRoute><ProfileDetails /></ProtectedRoute>} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
